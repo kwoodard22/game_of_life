@@ -3,11 +3,9 @@ public class Cell {
     public void Cell () {
     }
     
-    public isAlive(int numberOfNeighbors) {
-        Int neighbors = numberOfNeighbors;
-        
+    public isAlive(boolean livingCell, int neighbors) {
         // if currently alive
-        if (population[cellIndex]) {
+        if (livingCell) {
             if (neighbors < 2) { return false};
             if (neighbors >= 2 && neighbors <= 3) { return true; }
             if (neighbors > 3) { return false; }
@@ -33,17 +31,3 @@ public class Cell {
       
   1. Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
 */
-
-/* 
- * [ 
- *   [false, false, false, false],
- *   [true,  true,  false, false],
- *   [true,  false, false, true],
- *   [false, false, false, true]
- * ]
- * 
- * [ false, false, false, false, true, true, false, false, true, false, false, true, false, false, false, true]
- * 
- * 
- * 
- */
