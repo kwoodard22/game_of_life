@@ -10,7 +10,6 @@ import edu.princeton.cs.algs4.StdRandom;
 import edu.princeton.cs.algs4.StdDraw;
 
 public class Board {
-    int numAlive;
     int n;
     boolean[][] grid;
     boolean[][] gridCopy;
@@ -18,7 +17,6 @@ public class Board {
     // Create n-by-n grid with random live cells placed
     public Board(int gridSize, int liveCells) {
         int n = gridSize;
-        numAlive = liveCells;
         
         grid = new boolean[n][n];
         gridCopy = new boolean[n][n];
@@ -29,20 +27,19 @@ public class Board {
             int col = StdRandom.uniform(n);
             if (!grid[row][col]) {
                 grid[row][col] = true;
-                gridCopy[row][col] = true;
-                numAlive++;
                 i++;
             }
+            gridCopy = grid;
         }
     }
     
     public void updatePopulation() {
         Cell cell = new Cell();
         
-        for (int r = 0; r < n; r++) {
-            for (int c = 0; c < n; c++) {
-                boolean alive = cell.isAlive(grid[r][c], numberOfNeighbors(r, c));
-                gridCopy[r][c] = alive;
+        for (int row = 0; row < n; row++) {
+            for (int col = 0; col < n; col++) {
+                boolean alive = cell.isAlive(grid[row][col], numberOfNeighbors(row, col));
+                gridCopy[row][col] = alive;
             }
         }
         grid = gridCopy;
@@ -62,20 +59,28 @@ public class Board {
         int neighbors = 0;
         //topLeft
         if ((col > 0 && row > 0) && grid[row - 1][col - 1]) { neighbors++; }
+        
         // top
-        if ((col > 0) && grid[row][col - 1]) { neighbors++; }
+        if ((row > 0) && grid[row -1][col]) { neighbors++; }
+        
         // topRight
-        if ((col < (n-1) && row > 0) && grid[row - 1][col + 1]) { neighbors++; }
+        if ((col < (n-2) && row > 0) && grid[row - 1][col + 1]) { neighbors++; }
+        
         // right
-        if (col < (n-1) && grid[row][col + 1]) { neighbors++; }
+        if (col < (n-2) && grid[row][col + 1]) { neighbors++; }
+        
         // bottomRight
-        if ((row < (n-1) && col < (n-1)) && grid[row + 1][col]) { neighbors++; }
+        if ((row < (n-2) && col < (n-2)) && grid[row + 1][col + 1]) { neighbors++; }
+        
         // bottom
-        if (row < (n-1) && grid[row + 1][col]) { neighbors++; }
+        if (row < (n-2) && grid[row + 1][col]) { neighbors++; }
+        
         // bottomLeft
-        if ((row < (n-1) && col > 0) && grid[row + 1][col - 1]) { neighbors++; }
+        if ((row < (n-2) && col > 0) && grid[row + 1][col - 1]) { neighbors++; }
+        
         // left
         if (col > 0 && grid[row][col - 1]) { neighbors++; }
+        
         return neighbors;
     }
 }
