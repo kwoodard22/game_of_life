@@ -22,7 +22,7 @@ public class Board {
         gridCopy = new boolean[n][n];
         
         // Randomly generate live cells
-        for (int i = 0; i < n;) {
+        for (int i = 0; i < liveCells;) {
             int row = StdRandom.uniform(n);
             int col = StdRandom.uniform(n);
             if (!grid[row][col]) {
@@ -46,7 +46,7 @@ public class Board {
     }
     
     
-    public boolean isAlive(int row, int col) {
+    public boolean cellAlive(int row, int col) {
         return grid[row][col];
     }
         

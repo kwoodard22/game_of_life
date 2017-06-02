@@ -1,18 +1,7 @@
 /******************************************************************************
- *  Compilation:  javac PercolationVisualizer.java
- *  Execution:    java PercolationVisualizer input.txt
- *  Dependencies: Percolation.java
- *
- *  This program takes the name of a file as a command-line argument.
- *  From that file, it
- *
- *    - Reads the grid size n of the percolation system.
- *    - Creates an n-by-n grid of sites (intially all blocked)
- *    - Reads in a sequence of sites (row i, column j) to open.
- *
- *  After each site is opened, it draws full sites in light blue,
- *  open sites (that aren't full) in white, and blocked sites in black,
- *  with with site (1, 1) in the upper left-hand corner.
+ *  Compilation:  javac GoLVisualizer.java
+ *  Execution:    java GoLVisualizer
+ *  Dependencies: Board.java Cell.java
  *
  ******************************************************************************/
 
@@ -39,12 +28,12 @@ public class GoLVisualizer {
         int alive = 0;
         for (int row = 0; row < n; row++) {
             for (int col = 0; col < n; col++) {
-                if (board.isAlive(row, col)) {
+                if (board.cellAlive(row, col)) {
                     StdDraw.setPenColor(StdDraw.BOOK_LIGHT_BLUE);
                     alive++;
                 }
                 else
-                    StdDraw.setPenColor(StdDraw.WHITE);
+                StdDraw.setPenColor(StdDraw.WHITE);
                 StdDraw.filledSquare(col - 0.5, n - row + 0.5, 0.45);
             }
         }
